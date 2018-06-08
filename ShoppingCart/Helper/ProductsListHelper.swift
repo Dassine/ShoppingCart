@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProductsList {
+class ProductsListHelper {
     
     private let productsJson = """
         [

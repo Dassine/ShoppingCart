@@ -14,6 +14,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var cart: Cart? = nil
     var quotes : [(key: String, value: Float)] = []
+    let currencyHelper = CurrencyHelper()
     
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var currencyPickerView: UIPickerView!
@@ -33,7 +34,17 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         selectedCurrency  = prefix
         totalLabel.text = (cart?.total.description)! + " " + selectedCurrency
         
-        refreshCurrency()
+        currencyHelper.refresh() { result in
+            
+            DispatchQueue.main.async(execute: {
+                for (key, value) in result {
+                    guard key.hasPrefix(self.prefix) else { return }
+                    
+                    self.quotes.append((key: String(key.dropFirst(self.prefix.count)), value: value))
+                }
+                self.currencyPickerView.reloadAllComponents()
+            })
+        }
     }
     
     override func didReceiveMemoryWarning() {

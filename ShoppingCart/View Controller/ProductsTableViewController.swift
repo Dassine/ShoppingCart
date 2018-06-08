@@ -10,7 +10,7 @@ import UIKit
 
 class ProductsTableViewController: UITableViewController, CartDelegate {
 
-    fileprivate let products:[Product] = ProductsList().all()
+    fileprivate let products:[Product] = ProductsListHelper().all()
     fileprivate var cart = Cart()
     
     fileprivate let reuseIdentifier = "ProductCell"
@@ -29,11 +29,8 @@ class ProductsTableViewController: UITableViewController, CartDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "showCart" {
-            if let cartTableViewController = segue.destination as? CartTableViewController {
-                cartTableViewController.cart = self.cart
-            }
-            
             if let cartViewController = segue.destination as? CartViewController {
                 cartViewController.cart = self.cart
             }

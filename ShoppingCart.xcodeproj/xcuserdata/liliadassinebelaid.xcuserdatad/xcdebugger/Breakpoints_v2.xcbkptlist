@@ -10,12 +10,107 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingCart/View Controller/CartTableViewController.swift"
-            timestampString = "550147695.184248"
+            timestampString = "550154124.900014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
             landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoppingCartTests/ProductsTestCase.swift"
+            timestampString = "550156205.167926"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "testProductUnits()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoppingCartTests.ProductsTestCase.testProductUnits() -&gt; ()"
+                  moduleName = "ShoppingCartTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCartTests/ProductsTestCase.swift"
+                  timestampString = "550151406.459379"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "970">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #1 : @autoclosure () throws -&gt; Swift.Bool in ShoppingCartTests.ProductsTestCase.testProductUnits() -&gt; ()"
+                  moduleName = "ShoppingCartTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCartTests/ProductsTestCase.swift"
+                  timestampString = "550151406.464054"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #2 : @autoclosure () -&gt; Swift.String in ShoppingCartTests.ProductsTestCase.testProductUnits() -&gt; ()"
+                  moduleName = "ShoppingCartTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCartTests/ProductsTestCase.swift"
+                  timestampString = "550151406.468321"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoppingCart/View Controller/CartViewController.swift"
+            timestampString = "550156205.168007"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoppingCartTests/CartTestCase.swift"
+            timestampString = "550156238.5892169"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "testAddToCart()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
