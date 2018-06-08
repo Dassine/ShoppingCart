@@ -10,7 +10,8 @@ import UIKit
 
 class ProductsTableViewController: UITableViewController, CartDelegate {
 
-    fileprivate let products:[Product] = Products().all()
+    fileprivate let products:[Product] = ProductsList().all()
+    fileprivate var cart = Cart()
     
     fileprivate let reuseIdentifier = "ProductCell"
     
@@ -27,6 +28,17 @@ class ProductsTableViewController: UITableViewController, CartDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCart" {
+            if let cartTableViewController = segue.destination as? CartTableViewController {
+                cartTableViewController.cart = self.cart
+            }
+            
+            if let cartViewController = segue.destination as? CartViewController {
+                cartViewController.cart = self.cart
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,9 +66,16 @@ class ProductsTableViewController: UITableViewController, CartDelegate {
     // MARK: - CartDelegate
     func updateCart(cell: ProductTableViewCell) {
         
-        let indexPath = tableView.indexPath(for: cell)
-        print(indexPath!.row)
-        checkoutBarButton.title = "Checkout \(indexPath?.row)"
+        guard  let indexPath = tableView.indexPath(for: cell)  else { return }
+        let product = products[indexPath.row]
+        
+        if !cart.contains(product: product) {
+            cart.add(product: product)
+        } else {
+            cart.remove(product: product)
+        }
+        
+        checkoutBarButton.title = "Checkout (\(cart.items.count))"
     }
     /*
     // Override to support conditional editing of the table view.

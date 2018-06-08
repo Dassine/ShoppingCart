@@ -20,7 +20,17 @@ class ProductTableViewCell: UITableViewCell {
     
     var delegate: CartDelegate?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+        addToCartButton.layer.cornerRadius = 5
+        addToCartButton.clipsToBounds = true
+    }
+    
     @IBAction func addToCart(_ sender: Any) {
+        addToCartButton.isSelected = !addToCartButton.isSelected
+        addToCartButton.backgroundColor = (!addToCartButton.isSelected) ? .black : .red
         self.delegate?.updateCart(cell: self)
     }
 }

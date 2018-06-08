@@ -1,0 +1,175 @@
+//
+//  CartTableViewController.swift
+//  ShoppingCart
+//
+//  Created by D. on 2018-06-05.
+//  Copyright © 2018 Lilia Dassine BELAID. All rights reserved.
+//
+
+import UIKit
+
+class CartTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, CartItemDelegate {
+    
+    var cart: Cart? = nil
+    var quotes : [(key: String, value: Float)] = []
+    
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var currencyPickerView: UIPickerView!
+    
+    fileprivate let apiKey = Bundle.main.object(forInfoDictionaryKey: "CL_APIKey") as! String
+    
+    let prefix = "USD"
+    var selectedCurrency: String = ""
+    
+    fileprivate let reuseIdentifier = "CartItemCell"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        selectedCurrency  = prefix
+        totalLabel.text = (cart?.total.description)! + " " + selectedCurrency
+        
+        refreshCurrency()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshCurrency() {
+        
+        let urlString = "http://apilayer.net/api/live?access_key=\(apiKey)"
+        guard let url:URL = URL(string: urlString) else { return }
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
+            URLSession.shared.dataTask(with: url) {
+                (data, response, error) in
+                guard let data = data else { return }
+                do {
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode(Currency.self, from: data)
+                    
+                    DispatchQueue.main.async(execute: {
+                        for (key, value) in data.quotes{
+                            guard key.hasPrefix(self.prefix) else { return }
+                            
+                            self.quotes.append((key: String(key.dropFirst(self.prefix.count)), value: value))
+                        }
+                        self.currencyPickerView.reloadAllComponents()
+                    })
+                    
+                } catch let err {
+                    print("Err", err)
+                }
+                }.resume()
+        })
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return (cart?.items.count)!
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CartItemTableViewCell
+        
+        if let cartItem = cart?.items[indexPath.item] {
+            cell.delegate = self
+            
+            cell.nameLabel.text = cartItem.product.name
+            cell.priceLabel.text = String.init(format: "$ %.02f per %@", cartItem.product.price, cartItem.product.unit)
+            cell.quantityLabel.text =  String(describing: cartItem.quantity)
+            cell.quantity = cartItem.quantity
+        }
+        
+        return cell
+    }
+    
+    // MARK - UIPickerViewDataSource & UIPickerViewDelegate
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return quotes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return quotes[row].key + " " + quotes[row].value.description
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedCurrency = quotes[row].key
+        let newTotal = ((cart?.total)! * quotes[row].value)
+        totalLabel.text = String(format: "%.2f", newTotal) + " " + selectedCurrency
+    }
+    
+    // MARK: - CartItemDelegate
+    func updateCartItem(cell: CartItemTableViewCell, quantity: Int) {
+        
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        guard let cartItem = cart?.items[indexPath.row] else { return }
+        
+        cartItem.quantity = quantity
+        
+        totalLabel.text = (cart?.total.description)! + " " + selectedCurrency
+    }
+    
+    /*
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
+    /*
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
+    /*
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+}
