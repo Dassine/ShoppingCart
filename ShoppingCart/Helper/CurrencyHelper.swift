@@ -40,7 +40,7 @@ extension CurrencyHelper {
                 
                 completionHandler((self.currency?.quotes)!)
             } catch let err {
-                print("Err", err)
+                print("Something wrong happened: ", err)
             }
             }.resume()
         
@@ -60,7 +60,7 @@ extension CurrencyHelper {
     
     func totalInCurrency(name: String, for total: Float) -> Float {
         self.selectedCurrency = name
-        guard let rate = currency?.quotes["USD"+name] else { return -1 }
+        guard let rate = currency?.quotes["USD"+name] else { return total }
         return total * rate
     }
     
