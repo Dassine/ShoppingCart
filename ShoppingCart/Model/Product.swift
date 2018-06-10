@@ -14,9 +14,9 @@ struct Product: Codable, Equatable {
     var price: Float
     var unit: String
     
-    func displayUnit(quantity: Int) -> String {
-        return quantity == 1 ? unit : unit + "s"
-    }
+//    func displayUnit(quantity: Int) -> String {
+//        return quantity == 1 ? unit : unit + "s"
+//    }
     
     // MARK: Equatable
     static func ==(lhs: Product, rhs: Product) -> Bool {

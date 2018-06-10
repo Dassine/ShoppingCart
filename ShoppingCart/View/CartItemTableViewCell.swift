@@ -37,8 +37,6 @@ class CartItemTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     @IBAction func updateCartItemQuantity(_ sender: Any) {
@@ -47,6 +45,9 @@ class CartItemTableViewCell: UITableViewCell {
         } else if quantity > 0 {
             quantity = quantity - 1
         }
+        
+        decrementButton.isEnabled = quantity > 0
+        decrementButton.backgroundColor = !decrementButton.isEnabled ? .gray : .black
         
         self.quantityLabel.text = String(describing: quantity)
         self.delegate?.updateCartItem(cell: self, quantity: quantity)

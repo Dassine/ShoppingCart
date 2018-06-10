@@ -20,65 +20,39 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var currencyPickerView: UIPickerView!
     
     fileprivate let apiKey = Bundle.main.object(forInfoDictionaryKey: "CL_APIKey") as! String
-    
-    let prefix = "USD"
-    var selectedCurrency: String = ""
-    
     fileprivate let reuseIdentifier = "CartItemCell"
+    
+    @IBOutlet weak var cartStateLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView(frame: .zero)
         
-        selectedCurrency  = prefix
-        totalLabel.text = (cart?.total.description)! + " " + selectedCurrency
+        //Update Cart Total lale
+        totalLabel.text = (cart?.total.description)! + " " + currencyHelper.selectedCurrency
         
-        currencyHelper.refresh() { result in
-            
-            DispatchQueue.main.async(execute: {
-                for (key, value) in result {
-                    guard key.hasPrefix(self.prefix) else { return }
-                    
-                    self.quotes.append((key: String(key.dropFirst(self.prefix.count)), value: value))
-                }
-                self.currencyPickerView.reloadAllComponents()
-            })
-        }
+        //Fill PickerView components
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
+            self.currencyHelper.refresh() { result in
+                
+                DispatchQueue.main.async(execute: {
+                    self.quotes = self.currencyHelper.all()
+                    self.currencyPickerView.reloadAllComponents()
+                })
+            }
+        })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        cartStateLabel.isHidden = cart?.items.count == 0 ? false : true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func refreshCurrency() {
-        
-        let urlString = "http://apilayer.net/api/live?access_key=\(apiKey)"
-        guard let url:URL = URL(string: urlString) else { return }
-        
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
-            URLSession.shared.dataTask(with: url) {
-                (data, response, error) in
-                guard let data = data else { return }
-                do {
-                    let decoder = JSONDecoder()
-                    let data = try decoder.decode(Currency.self, from: data)
-                    
-                    DispatchQueue.main.async(execute: {
-                        for (key, value) in data.quotes{
-                            guard key.hasPrefix(self.prefix) else { return }
-                            
-                            self.quotes.append((key: String(key.dropFirst(self.prefix.count)), value: value))
-                        }
-                        self.currencyPickerView.reloadAllComponents()
-                    })
-                    
-                } catch let err {
-                    print("Err", err)
-                }
-                }.resume()
-        })
     }
     
     // MARK: - Table view data source
@@ -93,7 +67,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         return (cart?.items.count)!
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CartItemTableViewCell
         
@@ -101,8 +74,8 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.delegate = self
             
             cell.nameLabel.text = cartItem.product.name
-            cell.priceLabel.text = String.init(format: "$ %.02f per %@", cartItem.product.price, cartItem.product.unit)
-            cell.quantityLabel.text =  String(describing: cartItem.quantity)
+            cell.priceLabel.text = String.init(format: "$%.02f per %@", cartItem.product.price, cartItem.product.unit)
+            cell.quantityLabel.text = String(describing: cartItem.quantity)
             cell.quantity = cartItem.quantity
         }
         
@@ -110,7 +83,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK - UIPickerViewDataSource & UIPickerViewDelegate
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -120,26 +92,25 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return quotes[row].key + " " + quotes[row].value.description
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCurrency = quotes[row].key
-        let newTotal = ((cart?.total)! * quotes[row].value)
-        totalLabel.text = String(format: "%.2f", newTotal) + " " + selectedCurrency
+        if !quotes.isEmpty {
+            guard let total = cart?.total else { return }
+            let newTotal = currencyHelper.totalInCurrency(name: quotes[row].key, for: total)
+            totalLabel.text = String(format: "%.2f", newTotal) + " " + currencyHelper.selectedCurrency
+        }
     }
     
     // MARK: - CartItemDelegate
     func updateCartItem(cell: CartItemTableViewCell, quantity: Int) {
-        
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         guard let cartItem = cart?.items[indexPath.row] else { return }
         
         cartItem.quantity = quantity
         
-        totalLabel.text = (cart?.total.description)! + " " + selectedCurrency
+        totalLabel.text = (cart?.total.description)! + " " + currencyHelper.selectedCurrency
     }
-    
     
 }

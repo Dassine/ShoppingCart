@@ -28,9 +28,13 @@ class ProductTableViewCell: UITableViewCell {
         addToCartButton.clipsToBounds = true
     }
     
-    @IBAction func addToCart(_ sender: Any) {
-        addToCartButton.isSelected = !addToCartButton.isSelected
+    func setButton(state: Bool) {
+        addToCartButton.isSelected = state
         addToCartButton.backgroundColor = (!addToCartButton.isSelected) ? .black : .red
+    }
+    
+    @IBAction func addToCart(_ sender: Any) {
+        setButton(state: !addToCartButton.isSelected)
         self.delegate?.updateCart(cell: self)
     }
 }

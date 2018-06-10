@@ -26,6 +26,23 @@ class Cart {
         }
     }
     
+    func update(product: Product) {
+        if !self.contains(product: product) {
+            self.add(product: product)
+        } else {
+            self.remove(product: product)
+        }
+    }
+    
+    func update() {
+        
+        for item in self.items {
+            if item.quantity == 0 {
+                update(product: item.product)
+            }
+        }
+    }
+    
     func add(product: Product) {
         let item = items.filter { $0.product == product }
         
@@ -39,13 +56,10 @@ class Cart {
     func remove(product: Product) {
         guard let index = items.index(where: { $0.product == product }) else { return}
         items.remove(at: index)
-        
     }
     
     func contains(product: Product) -> Bool {
-        
         let item = items.filter { $0.product == product }
-        
         return item.first != nil
     }
 }

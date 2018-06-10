@@ -142,8 +142,8 @@
 				238F4F4C20C558FC00A17A0B /* View */,
 				238F4F4B20C558EB00A17A0B /* View Controller */,
 				238F4F1E20C558CB00A17A0B /* Main.storyboard */,
-				238F4F2420C558CB00A17A0B /* Assets.xcassets */,
 				238F4F2620C558CB00A17A0B /* LaunchScreen.storyboard */,
+				238F4F2420C558CB00A17A0B /* Assets.xcassets */,
 				238F4F2920C558CB00A17A0B /* Info.plist */,
 				238F4F2120C558CB00A17A0B /* ShoppingCart.xcdatamodeld */,
 			);
