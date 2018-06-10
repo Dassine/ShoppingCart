@@ -11,7 +11,9 @@ import Foundation
 class Cart {
     
     private(set) var items : [CartItem] = []
-    
+}
+
+extension Cart {
     var total: Float {
         get { return items.reduce(0.0) { value, item in
             value + item.subTotal
@@ -26,7 +28,7 @@ class Cart {
         }
     }
     
-    func update(product: Product) {
+    func updateCart(with product: Product) {
         if !self.contains(product: product) {
             self.add(product: product)
         } else {
@@ -34,11 +36,11 @@ class Cart {
         }
     }
     
-    func update() {
+    func updateCart() {
         
         for item in self.items {
             if item.quantity == 0 {
-                update(product: item.product)
+                updateCart(with: item.product)
             }
         }
     }

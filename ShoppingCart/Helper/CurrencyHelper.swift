@@ -18,6 +18,9 @@ class CurrencyHelper {
     init() {
         apiKey = Bundle.main.object(forInfoDictionaryKey: "CL_APIKey") as! String
     }
+}
+
+extension CurrencyHelper {
     
     func quotes() -> Dictionary<String, Float>? {
         return self.currency?.quotes
@@ -59,6 +62,11 @@ class CurrencyHelper {
         self.selectedCurrency = name
         guard let rate = currency?.quotes["USD"+name] else { return -1 }
         return total * rate
+    }
+    
+    func display(total: Float) -> String {
+        let newTotal = totalInCurrency(name: selectedCurrency, for: total)
+        return String(format: "%.2f", newTotal) + " " + selectedCurrency
     }
 }
 

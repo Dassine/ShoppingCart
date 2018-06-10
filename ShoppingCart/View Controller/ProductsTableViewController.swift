@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductsTableViewController: UITableViewController, CartDelegate {
+class ProductsTableViewController: UITableViewController {
     
     fileprivate let products:[Product] = ProductsListHelper().all()
     fileprivate var cart = Cart()
@@ -30,7 +30,7 @@ class ProductsTableViewController: UITableViewController, CartDelegate {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         
         //Update cart if some items quantity is equal to 0 and reload the product table and right button bar item
-        cart.update()
+        cart.updateCart()
         self.navigationItem.rightBarButtonItem?.title = "Checkout (\(cart.items.count))"
         tableView.reloadData()
     }
@@ -67,19 +67,23 @@ class ProductsTableViewController: UITableViewController, CartDelegate {
         
         cell.delegate = self
         cell.nameLabel.text = product.name
-        cell.priceLabel.text = String.init(format: "$ %.02f per %@", product.price, product.unit)
+        cell.priceLabel.text = product.displayPrice()
         
         cell.setButton(state: self.cart.contains(product: product))
         
         return cell
     }
+}
+
+extension ProductsTableViewController: CartDelegate {
     
     // MARK: - CartDelegate
     func updateCart(cell: ProductTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let product = products[indexPath.row]
         
-        cart.update(product: product)
+        //Update Cart with product
+        cart.updateCart(with: product)
         
         self.navigationItem.rightBarButtonItem?.title = "Checkout (\(cart.items.count))"
     }

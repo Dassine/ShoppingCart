@@ -47,10 +47,12 @@ class CartTests: XCTestCase {
     
     func testCartQuantities() {
         
+        //Add a bag of Peas and add a dozen of eggs and check the quantity
         cart.add(product: peas)
         cart.add(product: eggs)
         XCTAssertEqual(cart.totalQuantity, 2, "Cart contains 2 products")
         
+        //Add a pack of milk and add a can of beans and check the quantity
         cart.add(product: milk)
         cart.add(product: beans)
         XCTAssertEqual(cart.totalQuantity, 4, "Cart should contains 4 products")

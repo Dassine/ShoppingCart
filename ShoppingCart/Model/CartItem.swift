@@ -18,13 +18,4 @@ class CartItem {
     init(product: Product) {
         self.product = product
     }
-    
-//    func displayPrice() -> String {
-//        return "\(quantity) \(product.displayUnit(quantity: quantity)) * \(product.price)"
-//    }
-    
-//    func displayQuantity() -> String {
-//        return "\(quantity)"
-//    }
-    
 }

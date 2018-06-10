@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingCart/View Controller/CartViewController.swift"
-            timestampString = "550309417.7030931"
+            timestampString = "550317710.9715379"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -22,47 +22,126 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoppingCart/Helper/CurrencyHelper.swift"
+            timestampString = "550317710.971873"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "display(total:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoppingCart.CurrencyHelper.display(total: Swift.Float) -&gt; Swift.String"
+                  moduleName = "ShoppingCart"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCart/Helper/CurrencyHelper.swift"
+                  timestampString = "550317238.5019"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoppingCartTests.CurrencyHelper.display(total: Swift.Float) -&gt; Swift.String"
+                  moduleName = "ShoppingCartTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCart/Helper/CurrencyHelper.swift"
+                  timestampString = "550317241.121949"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoppingCart/Model/Product.swift"
+            timestampString = "550317710.972115"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "displayPrice()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingCartTests/CurrencyTestCase.swift"
-            timestampString = "550309417.703258"
+            timestampString = "550317710.972332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "testQuotes()"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "ShoppingCartTests.CurrencyTestCase.testQuotes() -&gt; ()"
                   moduleName = "ShoppingCartTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCartTests/CurrencyTestCase.swift"
-                  timestampString = "550309418.704723"
+                  timestampString = "550317577.659948"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "1211">
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "2843">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 : @autoclosure () throws -&gt; Swift.Float in ShoppingCartTests.CurrencyTestCase.testQuotes() -&gt; ()"
+                  symbolName = "implicit closure #6 : @autoclosure () throws -&gt; Swift.String in ShoppingCartTests.CurrencyTestCase.testQuotes() -&gt; ()"
                   moduleName = "ShoppingCartTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCartTests/CurrencyTestCase.swift"
-                  timestampString = "550309418.707288"
+                  timestampString = "550317577.66406"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "14">
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #7 : @autoclosure () throws -&gt; Swift.String in ShoppingCartTests.CurrencyTestCase.testQuotes() -&gt; ()"
+                  moduleName = "ShoppingCartTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liliadassinebelaid/JOB/Interviews/Solera/ShoppingCart/ShoppingCartTests/CurrencyTestCase.swift"
+                  timestampString = "550317577.669082"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "19">
                </Location>
             </Locations>
          </BreakpointContent>

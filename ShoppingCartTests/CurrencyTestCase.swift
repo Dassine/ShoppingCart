@@ -13,7 +13,7 @@ class CurrencyTestCase: XCTestCase {
     let currencyHelper = CurrencyHelper()
     
     func testApiKey() {
-        
+        //Verify CL api key validity
         XCTAssertNotNil(currencyHelper.apiKey)
         XCTAssertTrue(currencyHelper.apiKey.count > 30)
     }
@@ -48,9 +48,13 @@ class CurrencyTestCase: XCTestCase {
         
         XCTAssertEqual(currencyHelper.totalInCurrency(name: "CAD", for: 1), rate, accuracy: 0.1)
         
+        //Verify a total in another currency
         let total: Float = 27.99
-        XCTAssertEqual(currencyHelper.totalInCurrency(name: "CAD", for: total), total * rate, accuracy: 0.1)
+        let convertedTotal: Float = total * rate
+        XCTAssertEqual(currencyHelper.totalInCurrency(name: "CAD", for: total), convertedTotal, accuracy: 0.1)
+        
+        //Verify total display
+        XCTAssertEqual("\(String(format: "%.2f", convertedTotal)) CAD", currencyHelper.display(total: total))
     }
-    
 }
 
