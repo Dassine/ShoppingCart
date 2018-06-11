@@ -235,20 +235,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LIO-An-sLM">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="LIO-An-sLM" firstAttribute="centerX" secondItem="VHk-mZ-7cO" secondAttribute="centerX" id="0xK-Ej-8oi"/>
                             <constraint firstItem="KpG-fh-OOJ" firstAttribute="top" secondItem="qb0-yt-4SZ" secondAttribute="top" constant="16" id="Cil-Ue-t3K"/>
+                            <constraint firstItem="LIO-An-sLM" firstAttribute="centerY" secondItem="VHk-mZ-7cO" secondAttribute="centerY" id="Ir1-jy-LFn"/>
                             <constraint firstItem="KpG-fh-OOJ" firstAttribute="trailing" secondItem="qb0-yt-4SZ" secondAttribute="trailing" id="aJU-ql-J3U"/>
                             <constraint firstItem="KpG-fh-OOJ" firstAttribute="leading" secondItem="qb0-yt-4SZ" secondAttribute="leading" id="wJc-E5-92I"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qb0-yt-4SZ"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="LIO-An-sLM" id="edV-YN-T7D"/>
                         <outlet property="cartStateLabel" destination="KpG-fh-OOJ" id="wtB-21-WRc"/>
                         <outlet property="currencyPickerView" destination="xaK-IB-pxe" id="qDb-bA-QjB"/>
                         <outlet property="tableView" destination="fXz-A8-kaB" id="Q0P-Q0-igH"/>
                         <outlet property="totalLabel" destination="3do-Tx-Kig" id="YMC-wH-zdL"/>
+                        <outlet property="totalView" destination="utd-8u-z9R" id="WMj-lg-daq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0up-qy-GVl" userLabel="First Responder" sceneMemberID="firstResponder"/>

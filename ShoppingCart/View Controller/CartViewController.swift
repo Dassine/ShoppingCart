@@ -12,25 +12,34 @@ class CartViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var totalView: UIView!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var currencyPickerView: UIPickerView!
+    
+    @IBOutlet weak var cartStateLabel: UILabel!
+    
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     var cart: Cart? = nil
     var quotes : [(key: String, value: Float)] = []
     let currencyHelper = CurrencyHelper()
     
-    @IBOutlet weak var totalLabel: UILabel!
-    @IBOutlet weak var currencyPickerView: UIPickerView!
     
     fileprivate let apiKey = Bundle.main.object(forInfoDictionaryKey: "CL_APIKey") as! String
     fileprivate let reuseIdentifier = "CartItemCell"
     
-    @IBOutlet weak var cartStateLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView(frame: .zero)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        //Update Cart Total lale
-        totalLabel.text = (cart?.total.description)! + " " + currencyHelper.selectedCurrency
+        //Show the acitvity indicator
+        showActivityIndicator()
         
         //Fill PickerView components
         //Get asynchronisly component on a background thread
@@ -38,21 +47,46 @@ class CartViewController: UIViewController {
             self.currencyHelper.refresh() { result in
                 //Update picker on main thread
                 DispatchQueue.main.async(execute: {
+                    //reload the picket view with the new quotes
                     self.quotes = self.currencyHelper.all()
                     self.currencyPickerView.reloadAllComponents()
+                    
+                    //Update Cart Total lale
+                    self.totalLabel.text = (self.cart?.total.description)! + " " + self.currencyHelper.selectedCurrency
+                    
+                    self.hideActivityIndicator()
                 })
             }
         })
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        cartStateLabel.isHidden = cart?.items.count == 0 ? false : true
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func showActivityIndicator() {
+        //Hide the view components
+        tableView.alpha = 0
+        totalView.alpha = 0
+        cartStateLabel.alpha = 0
+        
+        //Start the indicator
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        //Animate the cart view display
+        UIView.animate(withDuration: 1, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 3, options: .curveEaseInOut, animations: {
+            
+            //show the view components
+            self.tableView.alpha = 1
+            self.totalView.alpha = 1
+            self.cartStateLabel.alpha = self.cart?.items.count == 0 ? 1 : 0
+            
+            //Stop the activity indicator
+            self.activityIndicatorView.stopAnimating()
+        }, completion: nil)
     }
 }
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
